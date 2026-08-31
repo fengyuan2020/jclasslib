@@ -24,7 +24,9 @@ class GeneralDetailPane(services: BrowserServices) : KeyValueDetailPane<ClassFil
 
     override fun addLabels() {
         addDetail(getString("key.minor.version")) { classFile -> classFile.minorVersion.toString() }
-        addDetail(getString("key.major.version")) { classFile -> "${classFile.majorVersion} [${classFile.majorVersionVerbose}]" }
+        addDetail(getString("key.major.version")) { classFile ->
+            "${classFile.majorVersion} [${classFile.majorVersionVerbose}]" + if (classFile.isPreview) " (${getString("key.preview")})" else ""
+        }
         addDetail(getString("key.constant.pool.count")) { classFile -> classFile.constantPool.size.toString() }
         addDetail(getString("key.access.flags")) { classFile -> "${classFile.formattedAccessFlags} [${classFile.accessFlagsVerbose}]" }
         addConstantPoolLink(getString("key.this.class"), ClassFile::thisClass)

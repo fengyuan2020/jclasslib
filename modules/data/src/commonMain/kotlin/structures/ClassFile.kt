@@ -90,6 +90,12 @@ class ClassFile : Structure(), AttributeContainer {
             KnownMajorJavaVersions.entries.firstOrNull { it.majorVersion == majorVersion }?.verbose ?: "unknown value $majorVersion"
 
     /**
+     * Whether this class file was compiled with preview features enabled.
+     */
+    val isPreview: Boolean
+        get() = minorVersion == 0xFFFF
+
+    /**
      * Index of an equivalent constant pool entry, or -1 if no equivalent constant pool entry can be found.
      *
      * @param constant the constant pool entry
